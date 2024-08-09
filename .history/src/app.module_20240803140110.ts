@@ -45,7 +45,5 @@ import { UserModule } from './user/user.module';
   providers: [AppService],
 })
 export class AppModule {
-  constructor(private dataSource: DataSource,
-    private configService: ConfigService
-  ) { }
+  constructor(private dataSource: DataSource) { }
 }

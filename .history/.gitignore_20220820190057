@@ -36,6 +36,3 @@ lerna-debug.log*
 
 # Others
 todo.txt
-.env.development
-.env.test
-.history

@@ -29,11 +29,7 @@ switch (process.env.NODE_ENV) {
     });
     break;
   default:
-    //throw new Error('No database specified for this environment');
-    Object.assign(TYPEORM_CONFIG, {
-      database: 'wobclone_test',
-    });
-    break;
+    throw new Error('No database specified for this environment');
 }
 
 export { TYPEORM_CONFIG };
