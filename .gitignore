@@ -38,4 +38,4 @@ lerna-debug.log*
 todo.txt
 .env.development
 .env.test
-.history
+/.history
