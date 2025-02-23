@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query, Res, UploadedFiles, UseFilters, UseGuards, UseInterceptors } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiConsumes, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Roles } from '../decorators/roles.decorator';
 import { UserObj } from '../decorators/user-obj.decorator';
 import { DeleteFileOnErrorFilter } from '../filters/deleteFileOnError.filter';
@@ -20,20 +20,15 @@ export class EbooksController {
   constructor(private readonly ebooksService: EbooksService) { }
 
   //@Serialize(EbookDto)
-  @ApiOperation({
-    summary: 'GET -  filer ebooks',
-  })
-  @ApiResponse({
-    status: 200,
-    description: 'Return filtered ebooks',
-    schema: { type: 'array', items: { type: 'object' } }
-  })
-  //@ApiQuery({ type: FilterEbookDto })
+  @ApiOperation({ summary: 'Filter ebooks' })
+  @ApiResponse({ status: 200, description: 'Return filtered ebooks', schema: { type: 'array', items: { type: 'object' } } })
   @Get('/filter')
   async filter(@Query() query: FilterEbookDto) {
     return await this.ebooksService.filter(query);
   }
 
+  @ApiOperation({ summary: 'Get ebook cover photo' })
+  @ApiParam({ name: 'id', type: 'string', description: 'Ebook ID' })
   @Get('/file/photo/:id')
   async getPhoto(
     @Param('id') id: string,
@@ -42,6 +37,9 @@ export class EbooksController {
     return await this.ebooksService.getPhoto(id, res);
   }
 
+  @ApiOperation({ summary: 'Get ebook file (restricted to users)' })
+  @ApiBearerAuth()
+  @ApiParam({ name: 'id', type: 'string', description: 'Ebook ID' })
   @Get('/file/ebook/:id')
   @Roles('user')
   @UseGuards(AuthGuard('jwt'), RolesGuard)
@@ -53,6 +51,11 @@ export class EbooksController {
     return await this.ebooksService.getEbookFile(id, user, res);
   }
 
+
+  @ApiOperation({ summary: 'Update ebook (admin only)' })
+  @ApiBearerAuth()
+  @ApiParam({ name: 'id', type: 'string', description: 'Ebook ID' })
+  @ApiConsumes('multipart/form-data')
   @Patch('/update/:id')
   @Roles('admin')
   @UseGuards(AuthGuard('jwt'), RolesGuard)
@@ -72,7 +75,9 @@ export class EbooksController {
     return this.ebooksService.update(id, updateEbookDto, files);
   }
 
-
+  @ApiOperation({ summary: 'Delete ebook (admin only)' })
+  @ApiBearerAuth()
+  @ApiParam({ name: 'id', type: 'string', description: 'Ebook ID' })
   @Delete(':id')
   @Roles('admin')
   @UseGuards(AuthGuard('jwt'), RolesGuard)
@@ -80,6 +85,9 @@ export class EbooksController {
     return 'delete done';
   }
 
+  @ApiOperation({ summary: 'Add new ebook (admin only)' })
+  @ApiBearerAuth()
+  @ApiConsumes('multipart/form-data')
   @Post('/add/ebook')
   @Roles('admin')
   @UseGuards(AuthGuard('jwt'), RolesGuard)
