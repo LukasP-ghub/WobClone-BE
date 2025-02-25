@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { Response } from 'express';
-import { AuthLoginDto } from './dto/auth-login.dto';
-import { hashPwd } from "../utils/hash-pwd";
-import { v4 as uuid } from 'uuid';
-import { sign } from 'jsonwebtoken';
-import { JwtPayload } from "./jwt.strategy";
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from '../user/entities/user.entity';
+import { Response } from 'express';
+import { sign } from 'jsonwebtoken';
 import { Repository } from 'typeorm';
+import { v4 as uuid } from 'uuid';
+import { hashPwd } from "../../utils/hash-pwd";
+import { User } from '../user/entities/user.entity';
+import { AuthLoginDto } from './dto/auth-login.dto';
+import { JwtPayload } from "./jwt.strategy";
 
 @Injectable()
 export class AuthService {

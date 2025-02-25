@@ -2,9 +2,9 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as path from 'path';
 import * as request from 'supertest';
+import { AddEbookDto } from '../src/modules/ebooks/dto/add-ebook.dto';
 import { setupApp } from '../src/setup-app';
 import { AppModule } from './../src/app.module';
-import { AddEbookDto } from './../src/ebooks/dto/add-ebook.dto';
 import { storageDir } from './../src/utils/storage';
 
 

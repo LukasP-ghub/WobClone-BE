@@ -1,9 +1,9 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Roles } from '../decorators/roles.decorator';
-import { UserObj } from '../decorators/user-obj.decorator';
-import { RolesGuard } from '../guards/roles.guard';
+import { Roles } from '../../decorators/roles.decorator';
+import { UserObj } from '../../decorators/user-obj.decorator';
+import { RolesGuard } from '../../guards/roles.guard';
 import { RegisterDto } from './dto/register.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';

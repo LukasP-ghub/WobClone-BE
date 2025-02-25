@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { hashPwd } from '../utils/hash-pwd';
-import { RegisterUserResponse } from '../types/user';
+import { Repository } from 'typeorm';
+import { v4 as uuid } from 'uuid';
+import { RegisterUserResponse } from '../../types/user';
+import { hashPwd } from '../../utils/hash-pwd';
 import { RegisterDto } from './dto/register.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
-import { Repository } from 'typeorm';
-import { v4 as uuid } from 'uuid';
 
 @Injectable()
 export class UserService {

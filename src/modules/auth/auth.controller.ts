@@ -1,10 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Res, UseGuards } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { Response } from 'express';
-import { AuthLoginDto } from './dto/auth-login.dto';
+import { Body, Controller, Get, Post, Res, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { UserObj } from '../decorators/user-obj.decorator';
+import { Response } from 'express';
+import { UserObj } from '../../decorators/user-obj.decorator';
 import { User } from '../user/entities/user.entity';
+import { AuthService } from './auth.service';
+import { AuthLoginDto } from './dto/auth-login.dto';
 
 
 @Controller('auth')

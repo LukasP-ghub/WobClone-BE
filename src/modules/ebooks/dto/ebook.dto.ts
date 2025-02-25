@@ -1,16 +1,16 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Expose, plainToInstance, Transform, Type } from "class-transformer";
 import {
-  ArrayMinSize, ArrayNotEmpty, IsAlpha, IsArray, IsDateString, IsNotEmpty,
-  IsNotEmptyObject, IsNumber, IsObject, IsString, Max,
-  Min,
-  ValidateNested
+    ArrayMinSize, ArrayNotEmpty, IsAlpha, IsArray, IsDateString, IsNotEmpty,
+    IsNotEmptyObject, IsNumber, IsObject, IsString, Max,
+    Min,
+    ValidateNested
 } from "class-validator";
+import { tryJsonParse } from "../../../utils/tryJsonParse";
 import { AuthorDto } from "../../authors/dto/author.dto";
 import { CategoryDto } from "../../categories/dto/category.dto";
 import { DiscountDto } from "../../discounts/dto/discount.dto";
 import { PublisherDto } from "../../publishers/dto/publisher.dto";
-import { tryJsonParse } from "../../utils/tryJsonParse";
 import { CoverDto } from "./cover.dto";
 
 export class EbookDto {

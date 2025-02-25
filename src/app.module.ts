@@ -4,14 +4,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthModule } from './auth/auth.module';
-import { AuthorsModule } from './authors/authors.module';
-import { CategoriesModule } from './categories/categories.module';
-import { DiscountsModule } from './discounts/discounts.module';
-import { EbooksModule } from './ebooks/ebooks.module';
-import { OrdersModule } from './orders/orders.module';
-import { PublishersModule } from './publishers/publishers.module';
-import { UserModule } from './user/user.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { AuthorsModule } from './modules/authors/authors.module';
+import { CategoriesModule } from './modules/categories/categories.module';
+import { DiscountsModule } from './modules/discounts/discounts.module';
+import { EbooksModule } from './modules/ebooks/ebooks.module';
+import { OrdersModule } from './modules/orders/orders.module';
+import { PublishersModule } from './modules/publishers/publishers.module';
+import { UserModule } from './modules/user/user.module';
 
 @Module({
   imports: [

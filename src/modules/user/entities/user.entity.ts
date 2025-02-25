@@ -1,10 +1,10 @@
-import { Order } from '../../orders/entities/order.entity';
 import {
-  Column,
-  Entity,
-  OneToMany,
-  PrimaryGeneratedColumn,
+    Column,
+    Entity,
+    OneToMany,
+    PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Order } from '../../orders/entities/order.entity';
 
 @Entity()
 export class User {

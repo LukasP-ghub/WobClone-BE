@@ -2,7 +2,7 @@ import { OmitType } from "@nestjs/mapped-types";
 import { ApiProperty } from "@nestjs/swagger";
 import { Expose, Transform } from "class-transformer";
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsNotEmpty, IsString } from "class-validator";
-import { tryJsonParse } from "../../utils/tryJsonParse";
+import { tryJsonParse } from "../../../utils/tryJsonParse";
 import { EbookDto } from "./ebook.dto";
 
 export class AddEbookDto extends OmitType(EbookDto, ['author', 'discount', 'publisher', 'category', 'ebook_id', 'cover'] as const) {

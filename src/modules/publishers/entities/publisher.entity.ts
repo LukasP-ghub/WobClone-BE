@@ -1,8 +1,8 @@
 import {
-  Column,
-  Entity,
-  OneToMany,
-  PrimaryGeneratedColumn,
+    Column,
+    Entity,
+    OneToMany,
+    PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Ebook } from '../../ebooks/entities/ebook.entity';
 

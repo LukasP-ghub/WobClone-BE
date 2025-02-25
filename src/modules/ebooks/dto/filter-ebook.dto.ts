@@ -1,7 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Expose } from "class-transformer";
 import { IsEnum, IsNumber, IsOptional, IsString, Max, Min } from "class-validator";
-import { Sorting } from "../../types";
+import { Sorting } from "../../../types";
 
 
 export class FilterEbookDto {
