@@ -1,8 +1,10 @@
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as cookieParser from 'cookie-parser';
+import helmet from 'helmet';
 import { COOKIE_SECRET } from './config/secrets';
 import { AllExceptionsFilter } from './filters/allExceptionFilter.filter';
+import { SanitizeInterceptor } from './interceptors/sanitize.interceptor';
 
 export const setupApp = (app: any) => {
   app.enableCors({
@@ -22,6 +24,21 @@ export const setupApp = (app: any) => {
     }
   }));
 
+  app.use(helmet());
+  
+  app.use(
+    helmet.contentSecurityPolicy({
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "'nonce-abc123'"], 
+        objectSrc: ["'none'"], 
+        upgradeInsecureRequests: [],
+      },
+    }),
+  );
+
+  app.useGlobalInterceptors(new SanitizeInterceptor());
+  
   const config = new DocumentBuilder()
     .setTitle('Ebook store API description')
     .setDescription('Description of the API for the ebook store application')

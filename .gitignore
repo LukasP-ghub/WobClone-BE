@@ -39,4 +39,5 @@ todo.txt
 .env
 .env.development
 .env.test
+.env.production
 /.history

@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { getTypeOrmConfig } from './config/configuration';
 import { AuthModule } from './modules/auth/auth.module';
 import { AuthorsModule } from './modules/authors/authors.module';
 import { CategoriesModule } from './modules/categories/categories.module';
@@ -17,22 +18,31 @@ import { UserModule } from './modules/user/user.module';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: `.env.${process.env.NODE_ENV}`,
+       envFilePath: `.env.${process.env.NODE_ENV || 'development'}`,
     }),
+   
+    // TypeOrmModule.forRootAsync({
+    //   imports: [ConfigModule],
+    //   inject: [ConfigService],
+    //   useFactory: (configService: ConfigService) => ({
+    //     type: 'mysql',
+    //     host: configService.get('DB_HOST'),
+    //     port: Number(configService.get('DB_PORT')), // upewnij się, że masz DB_PORT w .env
+    //     username: configService.get('DB_USER'),
+    //     password: configService.get('DB_PASSWORD'),
+    //     database: configService.get('DB_NAME'),
+    //     entities: [__dirname + '/**/*.entity{.ts,.js}'],
+    //     synchronize: false, 
+    //   }),
+    // }),
+    
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: (configService: ConfigService) => {
-        return {
-          type: 'mysql',
-          database: configService.get('DB_NAME'),
-          entities: [__dirname + '/**/*.entity{.ts,.js}'],
-         //synchronize: true,
-        };
-      },
+      useFactory: getTypeOrmConfig,
     }),
 
-   // TypeOrmModule.forRoot(TYPEORM_CONFIG),
+    //TypeOrmModule.forRoot(TYPEORM_CONFIG),
     EbooksModule,
     AuthorsModule,
     CategoriesModule,
