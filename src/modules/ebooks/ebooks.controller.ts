@@ -6,11 +6,13 @@ import { Roles } from '../../decorators/roles.decorator';
 import { UserObj } from '../../decorators/user-obj.decorator';
 import { DeleteFileOnErrorFilter } from '../../filters/deleteFileOnError.filter';
 import { RolesGuard } from '../../guards/roles.guard';
+import { Serialize } from '../../interceptors/serialize.interceptor';
 import { MulterDiskUploadedFiles } from '../../types';
 import { multerStorage } from '../../utils/storage';
 import { User } from '../user/entities/user.entity';
 import { AddEbookDto } from './dto/add-ebook.dto';
-import { FilterEbookDto } from './dto/filter-ebook.dto';
+import { EbookDto } from './dto/ebook.dto';
+import { FilterEbookQueryDto } from './dto/filter-ebook-query.dto';
 import { UpdateEbookDto } from './dto/update-ebook.dto';
 import { EbooksService } from './ebooks.service';
 
@@ -19,11 +21,11 @@ import { EbooksService } from './ebooks.service';
 export class EbooksController {
   constructor(private readonly ebooksService: EbooksService) { }
 
-  //@Serialize(EbookDto)
+  @Serialize(EbookDto)
   @ApiOperation({ summary: 'Filter ebooks' })
   @ApiResponse({ status: 200, description: 'Return filtered ebooks', schema: { type: 'array', items: { type: 'object' } } })
   @Get('/filter')
-  async filter(@Query() query: FilterEbookDto) {
+  async filter(@Query() query: FilterEbookQueryDto) {
     return await this.ebooksService.filter(query);
   }
 

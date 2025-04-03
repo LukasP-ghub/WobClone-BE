@@ -4,7 +4,7 @@ import { IsEnum, IsNumber, IsOptional, IsString, Max, Min } from "class-validato
 import { Sorting } from "../../../types";
 
 
-export class FilterEbookDto {
+export class FilterEbookQueryDto {
   @Expose()
   @IsOptional()
   @IsString()

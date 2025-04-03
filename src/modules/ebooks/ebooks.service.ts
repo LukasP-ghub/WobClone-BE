@@ -11,7 +11,7 @@ import { DiscountsService } from '../discounts/discounts.service';
 import { PublishersService } from '../publishers/publishers.service';
 import { User } from '../user/entities/user.entity';
 import { AddEbookDto } from './dto/add-ebook.dto';
-import { FilterEbookDto } from './dto/filter-ebook.dto';
+import { FilterEbookQueryDto } from './dto/filter-ebook-query.dto';
 import { UpdateEbookDto } from './dto/update-ebook.dto';
 import { Cover } from './entities/cover.entity';
 import { Ebook } from './entities/ebook.entity';
@@ -90,7 +90,7 @@ export class EbooksService {
   }
 
 
-  async filter(filterConditions: FilterEbookDto): Promise<Ebook[]> {
+  async filter(filterConditions: FilterEbookQueryDto): Promise<Ebook[]> {
     const { phrase, maxPrice, minPrice, sorting, limit, page, category } = filterConditions;
     const skip = (page - 1) * limit;
     try {
@@ -119,6 +119,7 @@ export class EbooksService {
         take: limit,
         skip: skip,
         relations: {
+          publisher: true,
           cover: true,
           author: true,
           category: true,
